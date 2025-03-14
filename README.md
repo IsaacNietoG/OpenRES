@@ -1,4 +1,99 @@
-# RES: Remote Environment Storage
+# OpenRES: Remote Environment Storage
+
+Sistema seguro para el almacenamiento y gestión de variables de entorno en la nube, con soporte para cifrado post-cuántico.
+
+## Estructura del Proyecto
+
+```
+.
+├── api/                    # API REST en Python
+│   ├── src/               # Código fuente de la API
+│   └── requirements.txt   # Dependencias de Python
+├── crypto/                # Módulo de criptografía en Go
+│   └── src/              # Código fuente del módulo criptográfico
+├── cli/                   # CLI en Go
+│   └── src/              # Código fuente de la CLI
+└── tests/                 # Pruebas unitarias y de integración
+```
+
+## Requisitos
+
+### Para la API (Python)
+- Python 3.9+
+- FastAPI
+- Uvicorn
+- SQLAlchemy
+- Otras dependencias en `api/requirements.txt`
+
+### Para los módulos de Go (CLI y Criptografía)
+- Go 1.21+
+- Dependencias gestionadas por Go modules
+
+## Instalación
+
+1. Clonar el repositorio:
+```bash
+git clone https://github.com/mrtaichi/openres.git
+cd openres
+```
+
+2. Instalar dependencias de Python:
+```bash
+cd api
+python -m venv venv
+source venv/bin/activate  # En Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+3. Compilar los módulos de Go:
+```bash
+go mod download
+go build -o bin/openres cli/src/main.go
+```
+
+## Uso
+
+### Iniciar la API
+```bash
+cd api
+uvicorn src.main:app --reload
+```
+
+### Usar la CLI
+```bash
+# Establecer una variable
+openres set MI_VARIABLE mi_valor -p mi_proyecto -e production
+
+# Obtener una variable
+openres get MI_VARIABLE -p mi_proyecto -e production
+```
+
+## Características Principales
+
+- Cifrado post-cuántico usando Kyber-768
+- Organización de secretos por proyecto y entorno
+- API REST para integración con aplicaciones
+- CLI para gestión de variables
+- Soporte para múltiples entornos (development, staging, production)
+
+## Seguridad
+
+- Cifrado post-cuántico para protección contra amenazas futuras
+- Autenticación y autorización robusta
+- Cifrado en reposo y en tránsito
+- Separación de secretos por proyecto y entorno
+
+## Contribuir
+
+1. Fork el repositorio
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
 
 # Especificación de Requerimientos de Software (SRS)
 
@@ -122,9 +217,6 @@ Este sistema funcionará como un servicio independiente que podrá integrarse co
 - Alertas en caso de intentos de acceso no autorizados.
 - Soporte para integración con sistemas de monitoreo de seguridad (SIEM).
 
-## 5. Anexos y referencias
-
-[Diagramas C4](https://www.notion.so/Diagramas-C4-1ad093228e1a80d9ac04ceef490ea1eb?pvs=21)
-
+### 5 Anexos tecnicos (TODO)
 - Documentación de integración con aplicaciones externas.
 - Guía de seguridad recomendada para almacenamiento de secretos.
